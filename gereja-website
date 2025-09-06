@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Grace Fellowship Church</title>
+  <meta name="description" content="Elegant, minimal church website in black & warm gold." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --bg:#0b0b0c;          /* near-black */
+      --bg-2:#121214;        /* slightly lighter for sections */
+      --gold:#c7a552;        /* warm gold */
+      --gold-2:#e6c978;      /* soft highlight */
+      --text:#f2f2f2;        /* off-white */
+      --muted:#bdbdbd;
+      --card:#151517;
+      --radius:18px;
+      --shadow:0 10px 30px rgba(0,0,0,.35);
+      --max:1140px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0; color:var(--text); background:
+        radial-gradient(1200px 600px at 80% -10%, rgba(198,165,82,.18), transparent 60%),
+        radial-gradient(900px 500px at 10% 110%, rgba(230,201,120,.12), transparent 60%),
+        var(--bg);
+      font-family:Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      line-height:1.6;
+    }
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* Container */
+    .container{width:100%; max-width:var(--max); margin-inline:auto; padding-inline:20px}
+
+    /* Nav */
+    .nav-wrap{position:sticky; top:0; z-index:50; backdrop-filter:saturate(140%) blur(8px); background:rgba(11,11,12,.55); border-bottom:1px solid rgba(199,165,82,.15)}
+    nav{display:flex; align-items:center; justify-content:space-between; padding:14px 0}
+    .brand{display:flex; align-items:center; gap:12px}
+    .brand svg{width:26px; height:26px;}
+    .brand strong{font-family:"Playfair Display", serif; letter-spacing:.3px; font-weight:600}
+    .menu{display:flex; gap:20px; align-items:center}
+    .menu a{padding:10px 12px; border-radius:12px; color:var(--muted)}
+    .menu a:hover{color:var(--text); background:rgba(199,165,82,.1)}
+    .cta{padding:10px 14px; border:1px solid rgba(199,165,82,.6); color:var(--gold); border-radius:999px}
+    .cta:hover{background:rgba(199,165,82,.08)}
+    .hamburger{display:none; background:none; border:none; color:var(--text); font-size:20px; padding:8px; border-radius:10px}
+    .hamburger:focus{outline:2px solid rgba(199,165,82,.4)}
+
+    /* Mobile menu */
+    .mobile{display:none; padding-bottom:14px}
+    .mobile a{display:block; padding:10px 12px; border-radius:10px; color:var(--muted)}
+    .mobile a:hover{background:rgba(199,165,82,.1); color:var(--text)}
+
+    /* Hero */
+    .hero{position:relative; padding:110px 0 90px; overflow:hidden}
+    .hero-inner{display:grid; grid-template-columns:1.15fr .85fr; gap:36px; align-items:center}
+    .badge{display:inline-flex; align-items:center; gap:10px; color:var(--gold); background:rgba(199,165,82,.08); border:1px solid rgba(199,165,82,.25); padding:8px 12px; border-radius:999px; font-size:14px}
+    .title{font-family:"Playfair Display", serif; font-size:clamp(34px, 5.2vw, 56px); line-height:1.12; margin:16px 0 12px}
+    .subtitle{color:#e6e6e6; max-width:56ch}
+    .hero-cta{margin-top:22px; display:flex; gap:12px; flex-wrap:wrap}
+    .btn{padding:12px 16px; border-radius:14px; border:1px solid rgba(199,165,82,.55); color:var(--bg); background:linear-gradient(180deg, var(--gold-2), var(--gold)); font-weight:600}
+    .btn:hover{filter:brightness(1.05)}
+    .btn.ghost{background:transparent; color:var(--gold); border:1px solid rgba(199,165,82,.4)}
+
+    .hero-card{position:relative; border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow); border:1px solid rgba(255,255,255,.06)}
+    .hero-media{aspect-ratio: 16 / 10; background:url('https://images.unsplash.com/photo-1544016864-9e9e2e8347bb?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat}
+    .overlay{position:absolute; inset:0; background:linear-gradient(180deg, rgba(11,11,12,0) 20%, rgba(11,11,12,.6) 100%)}
+    .verse{position:absolute; bottom:16px; left:16px; right:16px; padding:14px; border-radius:12px; background:rgba(11,11,12,.55); border:1px solid rgba(199,165,82,.25); color:var(--gold-2); font-weight:600}
+
+    /* Sections */
+    section{padding:72px 0}
+    .section-title{font-family:"Playfair Display", serif; font-size:28px; margin:0 0 22px}
+    .section-lead{color:var(--muted); max-width:70ch}
+
+    /* About */
+    .about{display:grid; grid-template-columns:1fr 1fr; gap:26px}
+    .card{background:var(--card); border:1px solid rgba(255,255,255,.06); border-radius:var(--radius); padding:22px; box-shadow:var(--shadow)}
+
+    /* Gallery */
+    .grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .tile{border-radius:16px; overflow:hidden; border:1px solid rgba(255,255,255,.06); box-shadow:var(--shadow)}
+    .tile img{aspect-ratio:4/3; object-fit:cover}
+
+    /* Events */
+    .events{display:grid; grid-template-columns: .7fr 1.3fr; gap:22px}
+    .filter{display:flex; gap:8px; flex-wrap:wrap}
+    .chip{padding:8px 12px; border-radius:999px; border:1px solid rgba(199,165,82,.35); color:var(--gold)}
+    .chip.active{background:rgba(199,165,82,.1)}
+    .event-list{display:grid; gap:12px}
+    .event{display:flex; gap:16px; background:var(--card); border:1px solid rgba(255,255,255,.06); border-left:3px solid var(--gold); padding:16px; border-radius:14px; align-items:center}
+    .event time{color:var(--gold-2); font-weight:600; min-width:96px}
+    .event h4{margin:0 0 6px; font-size:18px}
+    .event p{margin:0; color:var(--muted)}
+
+    /* Footer */
+    footer{padding:46px 0 60px; background:linear-gradient(180deg, rgba(199,165,82,.06), rgba(11,11,12,.2)); border-top:1px solid rgba(199,165,82,.15)}
+    .footer-grid{display:grid; grid-template-columns:1.2fr .8fr .8fr; gap:22px}
+    .logo-mark{display:flex; align-items:center; gap:12px}
+    .social{display:flex; gap:12px}
+    .social a{width:36px; height:36px; display:grid; place-items:center; border:1px solid rgba(199,165,82,.35); border-radius:12px; color:var(--gold)}
+
+    /* Utilities */
+    .muted{color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hero-inner{grid-template-columns:1fr}
+      .about{grid-template-columns:1fr}
+      .events{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr 1fr}
+      .footer-grid{grid-template-columns:1fr 1fr}
+      .menu{display:none}
+      .hamburger{display:inline-grid}
+      .mobile{display:block}
+    }
+    @media (max-width: 560px){
+      .grid{grid-template-columns:1fr}
+      .footer-grid{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation -->
+  <div class="nav-wrap">
+    <div class="container">
+      <nav aria-label="Primary">
+        <a class="brand" href="#">
+          <!-- Subtle cross icon -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M6 8h12" stroke="currentColor" stroke-width="2" opacity=".8"/></svg>
+          <strong>Grace Fellowship</strong>
+        </a>
+        <div class="menu" role="menubar">
+          <a href="#about" role="menuitem">About</a>
+          <a href="#gallery" role="menuitem">Gallery</a>
+          <a href="#events" role="menuitem">Events</a>
+          <a href="#contact" role="menuitem" class="cta">Contact</a>
+        </div>
+        <button class="hamburger" aria-expanded="false" aria-controls="mobileMenu" id="hambtn">☰</button>
+      </nav>
+      <div id="mobileMenu" class="mobile" hidden>
+        <a href="#about">About</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#events">Events</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="container hero-inner">
+      <div>
+        <span class="badge">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M4 8h16" stroke="currentColor" stroke-width="2"/></svg>
+          A Place to Belong
+        </span>
+        <h1 class="title">Hope, Faith, and Community</h1>
+        <p class="subtitle">We are a welcoming church family rooted in Scripture and service. Join us for worship, fellowship, and outreach as we share the love of Christ in our city.</p>
+        <div class="hero-cta">
+          <a href="#events" class="btn">See Upcoming Events</a>
+          <a href="#about" class="btn ghost">Learn More</a>
+        </div>
+      </div>
+      <div class="hero-card" aria-label="Hero image with inspirational overlay">
+        <div class="hero-media" role="img" aria-label="Sun rays in a cathedral with people worshipping"></div>
+        <div class="overlay" aria-hidden="true"></div>
+        <div class="verse">“Your word is a lamp to my feet and a light to my path.” — Psalm 119:105</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About -->
+  <section id="about">
+    <div class="container about">
+      <div class="card">
+        <h2 class="section-title">About Our Church</h2>
+        <p class="section-lead">Founded to serve our neighborhood with truth and grace, Grace Fellowship gathers weekly for worship and small groups throughout the week. Everyone is welcome.</p>
+        <ul>
+          <li>Sunday Worship: 9:00 AM & 11:00 AM</li>
+          <li>Midweek Prayer: Wednesday 7:00 PM</li>
+          <li>Youth & Kids Ministry: Saturdays 4:00 PM</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 style="margin-top:0">Our Mission</h3>
+        <p>To glorify God by making disciples who love Jesus, live in community, and serve the world.</p>
+        <h3>Our Values</h3>
+        <p class="muted">Scripture • Prayer • Worship • Community • Mission</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery">
+    <div class="container">
+      <h2 class="section-title">Community Moments</h2>
+      <p class="section-lead">Snapshots from services, outreach, and gatherings.</p>
+      <div class="grid" aria-label="Photo gallery">
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1504051771394-dd2e66b2e08f?q=80&w=1200&auto=format&fit=crop" alt="Congregation worship"/></figure>
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1491438590914-bc09fcaaf77a?q=80&w=1200&auto=format&fit=crop" alt="Bible study"/></figure>
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?q=80&w=1200&auto=format&fit=crop" alt="Outreach event"/></figure>
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80&w=1200&auto=format&fit=crop" alt="Youth gathering"/></figure>
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1531206715517-5c0ba140b2b8?q=80&w=1200&auto=format&fit=crop" alt="Prayer circle"/></figure>
+        <figure class="tile"><img src="https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?q=80&w=1200&auto=format&fit=crop" alt="Serving the city"/></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- Events -->
+  <section id="events">
+    <div class="container events">
+      <aside class="card">
+        <h2 class="section-title" style="margin-bottom:10px">Upcoming Events</h2>
+        <p class="section-lead">Stay connected with worship, prayer, and service.</p>
+        <div class="filter" role="tablist" aria-label="Filter events">
+          <button class="chip active" data-tag="all" role="tab" aria-selected="true">All</button>
+          <button class="chip" data-tag="worship" role="tab">Worship</button>
+          <button class="chip" data-tag="prayer" role="tab">Prayer</button>
+          <button class="chip" data-tag="youth" role="tab">Youth</button>
+          <button class="chip" data-tag="outreach" role="tab">Outreach</button>
+        </div>
+      </aside>
+      <div class="event-list" id="eventList" aria-live="polite">
+        <article class="event" data-tags="worship">
+          <time datetime="2025-09-14">Sun, Sep 14</time>
+          <div>
+            <h4>Sunday Worship Services</h4>
+            <p>Join us at 9:00 AM or 11:00 AM for a time of praise and teaching.</p>
+          </div>
+        </article>
+        <article class="event" data-tags="prayer">
+          <time datetime="2025-09-17">Wed, Sep 17</time>
+          <div>
+            <h4>Midweek Prayer Night</h4>
+            <p>Seek God together in a reflective, scripture-led prayer gathering.</p>
+          </div>
+        </article>
+        <article class="event" data-tags="youth">
+          <time datetime="2025-09-20">Sat, Sep 20</time>
+          <div>
+            <h4>Youth Hangout</h4>
+            <p>Games, worship, and small groups for teens. Invite a friend!</p>
+          </div>
+        </article>
+        <article class="event" data-tags="outreach">
+          <time datetime="2025-09-27">Sat, Sep 27</time>
+          <div>
+            <h4>City Outreach</h4>
+            <p>Serving our neighbors with food distribution and prayer support.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / Footer -->
+  <footer id="contact">
+    <div class="container footer-grid">
+      <div>
+        <div class="logo-mark">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 2v20M4 8h16" stroke="currentColor" stroke-width="2"/></svg>
+          <strong style="font-family:'Playfair Display',serif; font-size:20px">Grace Fellowship</strong>
+        </div>
+        <p class="muted" style="margin-top:10px">123 Hope Street, Your City<br/>Sunday Services 9:00 & 11:00</p>
+        <div class="social" aria-label="Social links">
+          <a href="#" aria-label="Facebook" title="Facebook">f</a>
+          <a href="#" aria-label="Instagram" title="Instagram">ig</a>
+          <a href="#" aria-label="YouTube" title="YouTube">yt</a>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-top:0">Contact</h4>
+        <p class="muted">Email: hello@gracefellowship.org<br/>Phone: (000) 123-4567</p>
+      </div>
+      <div>
+        <h4 style="margin-top:0">Service Times</h4>
+        <p class="muted">Sun 9:00 AM & 11:00 AM<br/>Wed 7:00 PM Prayer</p>
+      </div>
+    </div>
+    <div class="container" style="margin-top:22px; border-top:1px solid rgba(255,255,255,.06); padding-top:14px; color:var(--muted); font-size:14px">
+      © <span id="year"></span> Grace Fellowship. All rights reserved.
+    </div>
+  </footer>
+
+  <script>
+    // Mobile menu toggle
+    const hambtn = document.getElementById('hambtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hambtn?.addEventListener('click', ()=>{
+      const expanded = hambtn.getAttribute('aria-expanded') === 'true';
+      hambtn.setAttribute('aria-expanded', String(!expanded));
+      mobileMenu.hidden = expanded;
+    });
+
+    // Smooth scroll for in-page anchors
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const id = a.getAttribute('href');
+        if(id && id.length>1){
+          const target = document.querySelector(id);
+          if(target){
+            e.preventDefault();
+            target.scrollIntoView({behavior:'smooth', block:'start'});
+            mobileMenu.hidden = true;
+            hambtn.setAttribute('aria-expanded','false');
+          }
+        }
+      })
+    })
+
+    // Event filter chips
+    const chips = document.querySelectorAll('.chip');
+    const events = document.querySelectorAll('.event');
+    chips.forEach(chip=>{
+      chip.addEventListener('click', ()=>{
+        chips.forEach(c=>c.classList.remove('active'));
+        chip.classList.add('active');
+        const tag = chip.dataset.tag;
+        events.forEach(ev=>{
+          const list = ev.dataset.tags?.split(',')||[];
+          ev.style.display = (tag==='all' || list.includes(tag)) ? 'flex' : 'none';
+        })
+      })
+    })
+
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
